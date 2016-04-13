@@ -10,8 +10,13 @@ import reduxCatch from 'redux-catch';
 
 import reducer from './reducer';
 
+function errorHandler(error, getState) {
+  console.error(error);
+  console.debug('current state', getState());
+}
+
 const store = createStore(reducer, applyMiddleware(
-  reduxCatch(error => console.error(error))
+  reduxCatch(errorHandler)
 ));
 ```
 - `reduxCatch` receive a function to use when an error happen.

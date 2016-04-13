@@ -2,7 +2,11 @@ import test from 'tape';
 
 import middleware from '../build/index.js';
 
-const mockedMiddlewareAPI = {};
+const mockedMiddlewareAPI = {
+  getState() {
+    return 'test';
+  },
+};
 const baseError = new Error('There was an error.');
 
 test('Catch middleware - error case', t => {
@@ -10,12 +14,16 @@ test('Catch middleware - error case', t => {
     throw baseError;
   };
 
-  t.plan(2);
+  t.plan(3);
 
-  function errorHandler(error) {
+  function errorHandler(error, getState) {
     t.ok(
       error.message === baseError.message,
       'it should receive the expected error message in the `errorHandler`'
+    );
+    t.ok(
+      getState() === 'test',
+      'it should get the expected state from `getState()`'
     );
   }
 
