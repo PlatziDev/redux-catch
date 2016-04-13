@@ -1,0 +1,44 @@
+{
+  "name": "redux-catch",
+  "version": "1.0.0",
+  "description": "Error catcher middleware for Redux reducers and middlewares",
+  "main": "build/index.js",
+  "scripts": {
+    "lint": "eslint lib/index.js",
+    "prebuild": "npm run lint",
+    "build": "babel lib --out-dir build",
+    "pretest": "npm run build",
+    "test": "babel-node test/index.js | tap-spec",
+    "prepublish": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergiodxa/redux-catch.git"
+  },
+  "keywords": [
+    "redux",
+    "error",
+    "catch",
+    "middleware"
+  ],
+  "author": "Sergio Daniel Xalambrí <sergio@xalambri.com.ar> (http://sergio.xalambri.com.ar/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sergiodxa/redux-catch/issues"
+  },
+  "homepage": "http://sergio.xalambri.com.ar/redux-catch",
+  "devDependencies": {
+    "babel": "6.5.2",
+    "babel-cli": "6.7.5",
+    "babel-core": "6.7.6",
+    "babel-eslint": "6.0.2",
+    "babel-plugin-transform-es2015-arrow-functions": "6.5.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.7.4",
+    "eslint": "2.7.0",
+    "eslint-config-airbnb": "7.0.0",
+    "eslint-plugin-jsx-a11y": "0.6.2",
+    "eslint-plugin-react": "4.3.0",
+    "tap-spec": "4.1.1",
+    "tape": "4.5.1"
+  }
+}
