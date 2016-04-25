@@ -1,6 +1,6 @@
 {
   "name": "redux-catch",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Error catcher middleware for Redux reducers and middlewares",
   "main": "build/index.js",
   "scripts": {
