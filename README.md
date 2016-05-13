@@ -10,9 +10,9 @@ import reduxCatch from 'redux-catch';
 
 import reducer from './reducer';
 
-function errorHandler(error, getState) {
+function errorHandler(error, extraArgsObj) {
   console.error(error);
-  console.debug('current state', getState());
+  console.debug('current state', extraArgsObj.getState());
 }
 
 const store = createStore(reducer, applyMiddleware(
@@ -58,9 +58,9 @@ Now `redux-catch` will start to send the errors of your reducers and middlewares
 You can also add the state data as extra data for your errors so you can know the state at the moment of the error.
 
 ```javascript
-function errorHandler(error, getState) {
+function errorHandler(error, extraArgsObj) {
   Raven.context({
-    state: getState(),
+    state: extraArgsObj.getState(),
   });
   Raven.captureException(error);
 }

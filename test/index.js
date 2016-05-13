@@ -16,14 +16,14 @@ test('Catch middleware - error case', t => {
 
   t.plan(3);
 
-  function errorHandler(error, getState) {
+  function errorHandler(error, extraArgsObj) {
     t.ok(
       error.message === baseError.message,
       'it should receive the expected error message in the `errorHandler`'
     );
     t.ok(
-      getState() === 'test',
-      'it should get the expected state from `getState()`'
+      extraArgsObj.getState() === 'test',
+      'it should get the expected state from `extraArgsObj.getState()`'
     );
   }
 
