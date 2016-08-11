@@ -1,18 +1,18 @@
-import test from 'tape';
-
-import middleware from '../build/index.js';
+const test = require('tape');
+const middleware = require('./index.js');
 
 const mockedMiddlewareAPI = {
-  getState() {
+  getState: function getState() {
     return 'test';
   },
 };
+
 const baseError = new Error('There was an error.');
 
-test('Catch middleware - error case', t => {
-  const mockedNext = () => {
+function errorCase(t) {
+  function mockedNext() {
     throw baseError;
-  };
+  }
 
   t.plan(3);
 
@@ -33,10 +33,10 @@ test('Catch middleware - error case', t => {
     error.message === baseError.message,
     'it should return the expected error message'
   );
-});
+}
 
-test('Catch middleware - success case', t => {
-  const mockedNext = action => action;
+function successCase(t) {
+  function mockedNext(action) { return action; }
 
   t.plan(1);
 
@@ -49,4 +49,7 @@ test('Catch middleware - success case', t => {
     'TEST_ACTION',
     'it should be the passed action'
   );
-});
+}
+
+test('Catch middleware - error case', errorCase);
+test('Catch middleware - success case', successCase);
