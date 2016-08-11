@@ -1,14 +1,12 @@
 {
   "name": "redux-catch",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Error catcher middleware for Redux reducers and middlewares",
-  "main": "build/index.js",
+  "main": "index.js",
   "scripts": {
-    "lint": "eslint lib/index.js",
-    "prebuild": "npm run lint",
-    "build": "babel lib --out-dir build",
-    "pretest": "npm run build",
-    "test": "babel-node test/index.js | tap-spec",
+    "lint": "eslint index.js",
+    "pretest": "npm run lint",
+    "test": "node test.js | tap-spec",
     "prepublish": "npm run test"
   },
   "repository": {
@@ -28,12 +26,6 @@
   },
   "homepage": "http://sergio.xalambri.com.ar/redux-catch",
   "devDependencies": {
-    "babel": "6.5.2",
-    "babel-cli": "6.7.5",
-    "babel-core": "6.7.6",
-    "babel-eslint": "6.0.2",
-    "babel-plugin-transform-es2015-arrow-functions": "6.5.2",
-    "babel-plugin-transform-es2015-modules-commonjs": "6.7.4",
     "eslint": "2.7.0",
     "eslint-config-airbnb": "7.0.0",
     "eslint-plugin-jsx-a11y": "0.6.2",
