@@ -27,7 +27,7 @@ const store = createStore(reducer, applyMiddleware(
 To use it with Sentry just download the Sentry script from npm:
 
 ```bash
-npm i -S raven-js raven-node
+npm i -S raven-js raven
 ```
 - [raven-js](https://www.npmjs.com/package/raven-js): This is the client for browser usage.
 - [raven-node](https://github.com/getsentry/raven-node): This is the client for server usage.
