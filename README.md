@@ -48,7 +48,9 @@ And then use `Raven.captureException` as the error handler like this:
 
 ```javascript
 const store = createStore(reducer, applyMiddleware(
-  reduxCatch(Raven.captureException)
+  reduxCatch(function (error) {
+    Raven.captureException(error);
+  });
 ));
 ```
 
