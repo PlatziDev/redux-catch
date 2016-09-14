@@ -19,6 +19,7 @@ const store = createStore(reducer, applyMiddleware(
   reduxCatch(errorHandler)
 ));
 ```
+
 - `reduxCatch` receive a function to use when an error happen.
 - The error handler function could be just a `console.error` like the example above or a function to log the error in some kind of error tracking platform.
 - You should use this middleware as the first middleware in the chain, so its allowed to catch all the possible errors in the application.
@@ -29,6 +30,7 @@ To use it with Sentry just download the Sentry script from npm:
 ```bash
 npm i -S raven-js raven
 ```
+
 - [raven-js](https://www.npmjs.com/package/raven-js): This is the client for browser usage.
 - [raven-node](https://github.com/getsentry/raven-node): This is the client for server usage.
 
@@ -48,9 +50,7 @@ And then use `Raven.captureException` as the error handler like this:
 
 ```javascript
 const store = createStore(reducer, applyMiddleware(
-  reduxCatch(function (error) {
-    Raven.captureException(error);
-  });
+  reduxCatch(error => Raven.captureException(error));
 ));
 ```
 
