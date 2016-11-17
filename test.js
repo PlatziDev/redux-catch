@@ -5,18 +5,25 @@ const mockedMiddlewareAPI = {
   getState: function getState() {
     return 'test';
   },
+  dispatch: function dispatch() {
+    return dispatch;
+  }
 };
 
 const baseError = new Error('There was an error.');
+
+const errorAction = {
+  type: 'ERROR',
+};
 
 function errorCase(t) {
   function mockedNext() {
     throw baseError;
   }
 
-  t.plan(3);
+  t.plan(5);
 
-  function errorHandler(error, getState) {
+  function errorHandler(error, getState, dispatch, action) {
     t.ok(
       error.message === baseError.message,
       'it should receive the expected error message in the `errorHandler`'
@@ -25,9 +32,17 @@ function errorCase(t) {
       getState() === 'test',
       'it should get the expected state from `getState()`'
     );
+    t.ok(
+      dispatch === mockedMiddlewareAPI.dispatch,
+      'dispatch should be passed to the handler'
+    );
+    t.ok(
+      action === errorAction,
+      'it should pass through the action to the handler'
+    );
   }
 
-  const error = middleware(errorHandler)(mockedMiddlewareAPI)(mockedNext)();
+  const error = middleware(errorHandler)(mockedMiddlewareAPI)(mockedNext)(errorAction);
 
   t.ok(
     error.message === baseError.message,
