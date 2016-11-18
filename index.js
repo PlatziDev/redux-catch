@@ -5,7 +5,7 @@ function middlewareFactory(errorHandler) {
         try {
           return next(action);
         } catch (error) {
-          errorHandler(error, store.getState);
+          errorHandler(error, store.getState, store.dispatch, action);
           return error;
         }
       };
