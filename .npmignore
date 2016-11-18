@@ -1,6 +1,5 @@
 node_modules
-lib
-test
 logs
 *.log
-.babelrc
+.travis.yml
+test.js

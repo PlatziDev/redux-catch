@@ -1,19 +1,23 @@
 const test = require('tape');
 const middleware = require('./index.js');
 
+function getState() {
+  return 'test';
+}
+
+function dispatch() {
+  return dispatch;
+}
+
 const mockedMiddlewareAPI = {
-  getState: function getState() {
-    return 'test';
-  },
-  dispatch: function dispatch() {
-    return dispatch;
-  }
+  getState,
+  dispatch
 };
 
 const baseError = new Error('There was an error.');
 
 const errorAction = {
-  type: 'ERROR',
+  type: 'ERROR'
 };
 
 function errorCase(t) {
@@ -23,7 +27,7 @@ function errorCase(t) {
 
   t.plan(5);
 
-  function errorHandler(error, getState, dispatch, action) {
+  function errorHandler(error, getState, action, dispatch) {
     t.ok(
       error.message === baseError.message,
       'it should receive the expected error message in the `errorHandler`'
@@ -33,12 +37,12 @@ function errorCase(t) {
       'it should get the expected state from `getState()`'
     );
     t.ok(
-      dispatch === mockedMiddlewareAPI.dispatch,
-      'dispatch should be passed to the handler'
-    );
-    t.ok(
       action === errorAction,
       'it should pass through the action to the handler'
+    );
+    t.ok(
+      dispatch === mockedMiddlewareAPI.dispatch,
+      'dispatch should be passed to the handler'
     );
   }
 
@@ -51,12 +55,14 @@ function errorCase(t) {
 }
 
 function successCase(t) {
-  function mockedNext(action) { return action; }
+  function mockedNext(action) {
+    return action;
+  }
 
   t.plan(1);
 
   const action = middleware(error => error)(mockedMiddlewareAPI)(mockedNext)({
-    type: 'TEST_ACTION',
+    type: 'TEST_ACTION'
   });
 
   t.equal(
